@@ -1,0 +1,6 @@
+.statusComponent {
+  border-top: solid black 2px;
+  border-bottom: solid black 2px;
+  margin: 50px auto;
+  padding: 50px;
+}

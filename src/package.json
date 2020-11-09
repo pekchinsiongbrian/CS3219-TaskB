@@ -1,0 +1,24 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "description": "CS3219 Task B - REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --exit",
+    "start": "nodemon index"
+  },
+  "keywords": [],
+  "author": "Brian Pek",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "chai-like": "^1.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mocha": "^8.2.1",
+    "mongoose": "^5.10.13"
+  }
+}
