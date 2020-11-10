@@ -16,11 +16,8 @@ const corsHeaders = {
 // GET /votes/{email}
 module.exports.getVote = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
-    console.log(event);
 
     const email = event.pathParameters.email;
-    console.log(email);
-    console.log(typeof email);
 
     connectToDatabase().then(() => {
         Vote.findOne({ "email": email })
@@ -35,7 +32,7 @@ module.exports.getVote = (event, context, callback) => {
                 callback(null, {
                     statusCode: err.statusCode || 500,
                     headers: { 'Content-Type': 'text/plain' },
-                    body: 'Unable to find vote.',
+                    body: 'Unable to find vote.'
                 })
             );
     });
@@ -50,14 +47,14 @@ module.exports.postVote = (event, context, callback) => {
                 callback(null, {
                     statusCode: 200,
                     body: JSON.stringify(body),
-                    headers: corsHeaders,
+                    headers: corsHeaders
                 })
             )
             .catch((err) =>
                 callback(null, {
                     statusCode: err.statusCode || 500,
                     headers: { 'Content-Type': 'text/plain' },
-                    body: 'Unable to cast your vote.',
+                    body: 'Unable to cast your vote.'
                 })
             );
     });
@@ -68,7 +65,6 @@ module.exports.updateVote = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
     const body = JSON.parse(event.body); // email, candidate
-    console.log(body);
     const filter = { email: body.email };
     const update = { candidate: body.candidate };
 
@@ -78,14 +74,14 @@ module.exports.updateVote = (event, context, callback) => {
                 callback(null, {
                     statusCode: 200,
                     body: JSON.stringify(body),
-                    headers: corsHeaders,
+                    headers: corsHeaders
                 })
             )
             .catch((err) =>
                 callback(null, {
                     statusCode: err.statusCode || 500,
                     headers: { 'Content-Type': 'text/plain' },
-                    body: 'Unable to update your vote.',
+                    body: 'Unable to update your vote.'
                 })
             );
     });
@@ -97,7 +93,6 @@ module.exports.deleteVote = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
     const email = event.body;
-    console.log(email);
 
     connectToDatabase().then(() => {
         Vote.deleteOne({ "email": email })
@@ -105,14 +100,14 @@ module.exports.deleteVote = (event, context, callback) => {
                 callback(null, {
                     statusCode: 200,
                     body: JSON.stringify(body),
-                    headers: corsHeaders,
+                    headers: corsHeaders
                 })
             )
             .catch((err) =>
                 callback(null, {
                     statusCode: err.statusCode || 500,
                     headers: { 'Content-Type': 'text/plain' },
-                    body: 'Unable to remove your ballot.',
+                    body: 'Unable to remove your ballot.'
                 })
             );
     });

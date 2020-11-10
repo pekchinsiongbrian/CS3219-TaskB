@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Card } from 'react-bootstrap';
 import VotingStatus from './Components/VotingStatus';
 import VotingForm from './Components/VotingForm';
-import { initStore } from './actions/vote';
 
 import './styles/App.css';
 import Charizard from './images/charizard.png';
@@ -11,13 +10,6 @@ import Alakazam from './images/alakazam.png';
 import Pokeball from './images/pokeball.png';
 
 const App = () => {
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(initStore());
-  }, []);
-
   return (
     <div className="App">
       <header className="App-header">

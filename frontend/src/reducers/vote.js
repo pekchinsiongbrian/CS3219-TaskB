@@ -1,29 +1,16 @@
 import * as actionTypes from '../actions/actionTypes';
 
-const initialState = { 
-    votedFor: '', 
-    status: false,
-};
-
-const updateObject = (oldObject, updatedProperties) => {
-    return {
-        ...oldObject,
-        ...updatedProperties,
-    };
-};
-
-const initStore = (state, payload) => {
-    return state;
-}
+const initialState = {};
 
 const getVote = (state, payload) => {
-    if (payload !== '') {
-        const message = 'You have currently voted for ' + payload.candidate
+    const data = payload.data;
+    if (data !== '') {
+        const message = data.email + ' has currently voted for ' + data.candidate;
         alert(message);
-        return updateObject(state, { votedFor: payload.candidate, status: true });
     } else {
-        return state;
+        alert('The email provided has not been used in voting yet.')
     }
+    return state;
 }
 
 const setError = (state, payload) => {
@@ -34,7 +21,7 @@ const setError = (state, payload) => {
 const addVote = (state, { postedVote }) => {
     const message = 'Your ballot for ' + postedVote.candidate + ' has been cast!';
     alert(message);
-    return updateObject(state, { votedFor: postedVote.candidate });
+    return state;
 }
 
 const updateVote = (state, payload) => {
@@ -44,7 +31,11 @@ const updateVote = (state, payload) => {
 }
 
 const deleteVote = (state, payload) => {
-    alert('Your ballot has been deleted.');
+    if (payload.deletedCount > 0) {
+        alert('Your ballot has been deleted.');
+    } else {
+        alert('Delete failed: The email provided has not been used in voting yet.');
+    }
     return state;
 }
 
@@ -62,8 +53,6 @@ const reducer = (state = initialState, action) => {
             return updateVote(state, payload);
         case actionTypes.DELETE_VOTE:
             return deleteVote(state, payload);
-        case actionTypes.INIT_STORE:
-            return initStore(state, payload);
         default:
             return state;
     }

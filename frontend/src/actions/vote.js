@@ -1,42 +1,27 @@
 import axios from '../myAxios';
 import * as actionTypes from './actionTypes';
 
-export const initStore = () => (dispatch) => {
-    dispatch({
-        type: actionTypes.INIT_STORE,
-        payload: null,
-    })
-};
-
 // GET /votes/{email}
 export const getVote = (payload) => (dispatch) => {
-    console.log('Getting your vote...');
     const { email } = payload;
-    const voteToGet = axios.post('/votes/getVote' + email);
-
-    Promise.all([voteToGet])
-        .then(([res]) => {
-            const getVoteResponse = res;
+    
+    axios.get('/votes/getVote/' + email)
+        .then((res) => {
             dispatch({
                 type: actionTypes.GET_VOTE,
-                payload: {
-                    retrievedVote: getVoteResponse.data
-                }
+                payload: res
             });
         })
         .catch((error) => {
-            alert(error);
             dispatch({
                 type: actionTypes.SET_ERROR,
-                payload: 'ERROR: Unable to find vote. ' + error.message,
+                payload: 'ERROR: Unable to find vote. ' + error.message + '.\n\nThis could be due to failed connection, or this email has not been used in voting yet.',
             });
         });
 };
 
 // POST /votes
 export const postVote = (payload) => (dispatch) => {
-    console.log('Adding your ballot...');
-
     const voteToAdd = axios.post('/votes/add', JSON.stringify(payload));
 
     Promise.all([voteToAdd])
@@ -52,15 +37,13 @@ export const postVote = (payload) => (dispatch) => {
         .catch((error) => {
             dispatch({
                 type: actionTypes.SET_ERROR,
-                payload: 'ERROR: Unable to cast your vote: ' + error.message + '. This could be due to failed connection, or your email has already been used in voting.',
+                payload: 'ERROR: Unable to cast your vote: ' + error.message + '.\n\nThis could be due to failed connection, or this email has already been used in voting.',
             });
         });
 };
 
 // PUT /votes/{email}
 export const updateVote = (payload) => (dispatch) => {
-    console.log('Updating vote...');
-
     axios.put('/votes/update/' + payload.email, JSON.stringify(payload))
         .then((res) => {
             dispatch({
@@ -71,14 +54,13 @@ export const updateVote = (payload) => (dispatch) => {
     .catch((error) => {
         dispatch({
             type: actionTypes.SET_ERROR,
-            payload: 'ERROR: Unable to update your vote. ' + error.message,
+            payload: 'ERROR: Unable to update your vote. ' + error.message + '.\n\nThis could be due to failed connection, or this email has not been used in voting yet.',
         });
     });
 };
 
 // DELETE /votes/{email}
 export const deleteVote = (payload) => (dispatch) => {
-    console.log('Deleting your vote...');
     const { email } = payload;
 
     axios.delete('/votes/delete/' + email, { data: email })
@@ -90,8 +72,8 @@ export const deleteVote = (payload) => (dispatch) => {
         })
         .catch((error) => {
             dispatch({
-            type: actionTypes.SET_ERROR,
-            payload: 'ERROR: Unable to remove your ballot: ' + error.message,
+                type: actionTypes.SET_ERROR,
+                payload: 'ERROR: Unable to remove your ballot: ' + error.message + '.',
             });
         });
 };

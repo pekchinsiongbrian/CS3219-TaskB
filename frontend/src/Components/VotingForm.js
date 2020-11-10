@@ -16,7 +16,6 @@ const VotingForm = ({ header, voteType }) => {
 
     const handleChoiceChange = (e) => {
         e.persist();
-        console.log(e.target.value);
         if (voteType === 'first-vote') {
             setChoiceForFirstVote(e.target.value);
         } else {
@@ -25,7 +24,6 @@ const VotingForm = ({ header, voteType }) => {
     }
 
     const handleEmailChange = (e) => {
-        console.log(e.target.value);
         if (voteType === 'first-vote') {
             setEmailForFirstVote(e.target.value);
         } else {
