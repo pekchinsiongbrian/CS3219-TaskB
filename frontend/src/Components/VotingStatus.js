@@ -1,32 +1,51 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
+import { getVote, deleteVote } from '../actions/vote';
 import '../styles/VotingStatus.css';
 
 const VotingStatus = () => {
-    // Try to get (GET) your voting status
+
     const [voteStatus, setVoteStatus] = useState({ status: false, votedFor: '' });
     const [emailForCheck, setEmailForCheck] = useState('');
     const [emailForDelete, setEmailForDelete] = useState('');
 
+    const statusOfVote = useSelector((state) => state.vote.status);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setVoteStatus(statusOfVote);
+    }, [statusOfVote]);
+
     const handleCheckEmail = (e) => {
-        e.persist();
+        // e.persist();
         console.log(e.target.value);
         setEmailForCheck(e.target.value);
-    }
+    };
 
     const handleDeleteEmail = (e) => {
-        e.persist();
+        // e.persist();
         console.log(e.target.value);
         setEmailForDelete(e.target.value);
-    }
+    };
 
-    const handleCheck = () => {
-        console.log("yay");
-    }
+    const handleCheck = (e) => {
+        e.preventDefault();
+        const payload = {
+            email: emailForCheck
+        }
+        dispatch(getVote(payload));
+        setEmailForCheck('');
+    };
 
-    const handleDelete = () => {
-        console.log("wuhu");
-    }
+    const handleDelete = (e) => {
+        e.preventDefault();
+        const payload = {
+            email: emailForDelete
+        }
+        dispatch(deleteVote(payload));
+        setEmailForDelete('');
+    };
 
     const checker = (
         <div>
@@ -34,7 +53,7 @@ const VotingStatus = () => {
                 <h2>Check your vote</h2>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address to check vote: </Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" onChange={handleCheckEmail} />
+                    <Form.Control type="email" placeholder="Enter email" onChange={handleCheckEmail} value={emailForCheck} />
                     <br></br>
                     <Form.Text className="text-muted">
                     </Form.Text>
@@ -52,7 +71,7 @@ const VotingStatus = () => {
                 <h2>Delete your vote</h2>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address to delete vote: </Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" onChange={handleDeleteEmail} />
+                    <Form.Control type="email" placeholder="Enter email" onChange={handleDeleteEmail} value={emailForDelete} />
                     <br></br>
                     <Form.Text className="text-muted">
                     </Form.Text>

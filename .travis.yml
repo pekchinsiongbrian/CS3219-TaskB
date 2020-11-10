@@ -13,7 +13,7 @@ services:
   - mongodb
 
 script:
-  - npm test --prefix src
+  - npm test --prefix backend
 
 cache:
   directories:

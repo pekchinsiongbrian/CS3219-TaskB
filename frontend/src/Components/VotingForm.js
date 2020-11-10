@@ -1,38 +1,77 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
+import { postVote, updateVote } from '../actions/vote';
 import '../styles/Form.css';
 
 const VotingForm = ({ header, voteType }) => {
     
-    const [email, setEmail] = useState('');
-    const [choice, setChoice] = useState('');
+    const [emailForFirstVote, setEmailForFirstVote] = useState('');
+    const [emailForChangeVote, setEmailForChangeVote] = useState('');
+
+    const [choiceForFirstVote, setChoiceForFirstVote] = useState('');
+    const [choiceForChangeVote, setChoiceForChangeVote] = useState('');
+
+    const dispatch = useDispatch();
 
     const handleChoiceChange = (e) => {
         e.persist();
         console.log(e.target.value);
-        setChoice(e.target.value);
+        if (voteType === 'first-vote') {
+            setChoiceForFirstVote(e.target.value);
+        } else {
+            setChoiceForChangeVote(e.target.value);
+        }
     }
 
     const handleEmailChange = (e) => {
         console.log(e.target.value);
-        setEmail(e.target.value);
+        if (voteType === 'first-vote') {
+            setEmailForFirstVote(e.target.value);
+        } else {
+            setEmailForChangeVote(e.target.value);
+        }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email) && email.length > 0) {
-            console.log('Valid email');
+        if (voteType === 'first-vote') {
+            if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailForFirstVote) && emailForFirstVote.length > 0) || choiceForFirstVote === '') {
+                setEmailForFirstVote('');
+                setChoiceForFirstVote('');
+                return;
+            }
         } else {
-            console.log('Invalid email');
-            return;
+            if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(emailForChangeVote) && emailForChangeVote.length > 0) || choiceForChangeVote === '') {
+                setEmailForChangeVote('');
+                setChoiceForChangeVote('');
+                return;
+            }
         }
 
         if (voteType === "first-vote") {
-            return;
+            const payload = {
+                email: emailForFirstVote,
+                candidate: choiceForFirstVote
+            }
+            dispatch(postVote(payload));
         } else { // change vote
-            return;
+            const payload = {
+                email: emailForChangeVote,
+                candidate: choiceForChangeVote
+            }
+            dispatch(updateVote(payload));
         }
+
+        setEmailForFirstVote('');
+        setChoiceForFirstVote('');
+
+        setEmailForChangeVote('');
+        setChoiceForChangeVote('');
     }
+
+    const email = voteType === 'first-vote' ? emailForFirstVote : emailForChangeVote;
+    const choice = voteType === 'first-vote' ? choiceForFirstVote : choiceForChangeVote;
 
     return (
         <div className="form">
@@ -40,7 +79,7 @@ const VotingForm = ({ header, voteType }) => {
                 <h3>{header}</h3>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address: </Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} />
+                    <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} value={email} />
                     <br></br>
                     <Form.Text className="text-muted">
                     </Form.Text>
