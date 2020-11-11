@@ -22,7 +22,7 @@ export const getVote = (payload) => (dispatch) => {
 
 // POST /votes
 export const postVote = (payload) => (dispatch) => {
-    const voteToAdd = axios.post('/votes/add', JSON.stringify(payload));
+    const voteToAdd = axios.post('/votes/add/' + payload.email, JSON.stringify(payload));
 
     Promise.all([voteToAdd])
         .then(([res]) => {

@@ -4,12 +4,12 @@ Vote = require('./voteModel');
 exports.index = (req, res) => {
     Vote.get((err, votes) => {
         if (err) {
-            res.json({
+            return res.json({
                 status: 'error',
                 message: err,
             });
         } else {
-            res.json({
+            return res.json({
                 status: 'success',
                 message: 'All votes retrieved successfully',
                 data: votes
@@ -25,7 +25,7 @@ exports.view = (req, res) => {
         if (err) {
             res.send(err);
         } else {
-            res.json({
+            return res.json({
                 message: 'Getting your ballot',
                 data: vote
             });
@@ -38,15 +38,15 @@ exports.new = (req, res) => {
     const vote = new Vote();
     vote.email = req.body.email;
     vote.candidate = req.body.candidate;
-    
+
     vote.save((err) => {
         if (err) {
-            res.json({
+            return res.json({
                 status: 'error',
                 message: err,
             });
         } else {
-            res.json({
+            return res.json({
                 message: 'Vote in ballot box!',
                 data: vote
             });
@@ -98,8 +98,12 @@ exports.delete = (req, res) => {
             res.send(err);
         } else if (vote.deletedCount === 0) {
             res.statusCode = 404
+            return res.json({
+                status: 'failed',
+                message: 'Unable to find and delete vote'
+            })
         } else {
-            res.json({
+            return res.json({
                 status: 'success',
                 message: 'Ballot deleted'
             });
@@ -114,8 +118,12 @@ exports.deleteAll = (req, res) => {
             res.send(err);
         } else if (vote.deletedCount === 0) {
             res.statusCode = 404
+            return res.json({
+                status: 'failed',
+                message: 'Unable to find and delete votes'
+            })
         } else {
-            res.json({
+            return res.json({
                 status: 'success',
                 message: 'All ballots deleted'
             }); 

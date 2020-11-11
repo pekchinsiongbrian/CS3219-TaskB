@@ -178,7 +178,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/dev/1605019863509-2020-11-10T14:51:03.509Z/serverless.zip"
+                "S3Key": "serverless/serverless/dev/1605104106792-2020-11-11T14:15:06.792Z/serverless.zip"
               },
               "FunctionName": "serverless-dev-getVote",
               "Handler": "handler.getVote",
@@ -196,14 +196,14 @@
               "GetVoteLogGroup"
             ]
           },
-          "GetVoteLambdaVersionWkOWrGKO9OBuyPdqe5lHuQ6PwPwNZ3qXhXDjXZuc": {
+          "GetVoteLambdaVersionJOtKEBIJEPyncoJ0Fq63xOBWboBVYiH36uIMtzBtg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetVoteLambdaFunction"
               },
-              "CodeSha256": "+xGVb7twXuvkJbhEjPFEFLB8TajDkLLeeJRR3Swl+XM="
+              "CodeSha256": "Rl+hxiuqQ7OIA8E0amZX2LN7ja95I6HhzuJ5pXBRbdM="
             }
           },
           "PostVoteLambdaFunction": {
@@ -213,7 +213,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/dev/1605019863509-2020-11-10T14:51:03.509Z/serverless.zip"
+                "S3Key": "serverless/serverless/dev/1605104106792-2020-11-11T14:15:06.792Z/serverless.zip"
               },
               "FunctionName": "serverless-dev-postVote",
               "Handler": "handler.postVote",
@@ -231,14 +231,14 @@
               "PostVoteLogGroup"
             ]
           },
-          "PostVoteLambdaVersionn9a9ZSU6JgLkM0bATv2xnwjBbXJzMrUY1FYrfHK5Q": {
+          "PostVoteLambdaVersioneu4jKI8PvzLaWpADcwwhNR5ZdIwjipvrENmcExmL4A": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PostVoteLambdaFunction"
               },
-              "CodeSha256": "+xGVb7twXuvkJbhEjPFEFLB8TajDkLLeeJRR3Swl+XM="
+              "CodeSha256": "Rl+hxiuqQ7OIA8E0amZX2LN7ja95I6HhzuJ5pXBRbdM="
             }
           },
           "UpdateVoteLambdaFunction": {
@@ -248,7 +248,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/dev/1605019863509-2020-11-10T14:51:03.509Z/serverless.zip"
+                "S3Key": "serverless/serverless/dev/1605104106792-2020-11-11T14:15:06.792Z/serverless.zip"
               },
               "FunctionName": "serverless-dev-updateVote",
               "Handler": "handler.updateVote",
@@ -266,14 +266,14 @@
               "UpdateVoteLogGroup"
             ]
           },
-          "UpdateVoteLambdaVersion3EB0saqD8Y1dLqcS9ef8vt0NeS098hZ64AvCwX7Q29Q": {
+          "UpdateVoteLambdaVersion7Iqds2URxlsxvHv4fecILCRrTrdcYrr1bF4WBWvIgA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateVoteLambdaFunction"
               },
-              "CodeSha256": "+xGVb7twXuvkJbhEjPFEFLB8TajDkLLeeJRR3Swl+XM="
+              "CodeSha256": "Rl+hxiuqQ7OIA8E0amZX2LN7ja95I6HhzuJ5pXBRbdM="
             }
           },
           "DeleteVoteLambdaFunction": {
@@ -283,7 +283,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless/dev/1605019863509-2020-11-10T14:51:03.509Z/serverless.zip"
+                "S3Key": "serverless/serverless/dev/1605104106792-2020-11-11T14:15:06.792Z/serverless.zip"
               },
               "FunctionName": "serverless-dev-deleteVote",
               "Handler": "handler.deleteVote",
@@ -301,14 +301,14 @@
               "DeleteVoteLogGroup"
             ]
           },
-          "DeleteVoteLambdaVersion5fA0l5xKsl4BNMBKng7GgV2x5xwKhUy5FxfZpdi74kY": {
+          "DeleteVoteLambdaVersionu1YvmUQjtUfiXuMsVUTwbxxGSA19QmydrbEUCQDxn0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteVoteLambdaFunction"
               },
-              "CodeSha256": "+xGVb7twXuvkJbhEjPFEFLB8TajDkLLeeJRR3Swl+XM="
+              "CodeSha256": "Rl+hxiuqQ7OIA8E0amZX2LN7ja95I6HhzuJ5pXBRbdM="
             }
           },
           "ApiGatewayRestApi": {
@@ -369,6 +369,18 @@
                 "Ref": "ApiGatewayResourceVotes"
               },
               "PathPart": "add",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceVotesAddEmailVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceVotesAdd"
+              },
+              "PathPart": "{email}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -467,7 +479,7 @@
               }
             }
           },
-          "ApiGatewayMethodVotesAddOptions": {
+          "ApiGatewayMethodVotesAddEmailVarOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "AuthorizationType": "NONE",
@@ -505,7 +517,7 @@
                 ]
               },
               "ResourceId": {
-                "Ref": "ApiGatewayResourceVotesAdd"
+                "Ref": "ApiGatewayResourceVotesAddEmailVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -645,13 +657,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayMethodVotesAddPost": {
+          "ApiGatewayMethodVotesAddEmailVarPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
               "HttpMethod": "POST",
               "RequestParameters": {},
               "ResourceId": {
-                "Ref": "ApiGatewayResourceVotesAdd"
+                "Ref": "ApiGatewayResourceVotesAddEmailVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -774,7 +786,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1605019858841": {
+          "ApiGatewayDeployment1605104104837": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -784,11 +796,11 @@
             },
             "DependsOn": [
               "ApiGatewayMethodVotesGetvoteEmailVarOptions",
-              "ApiGatewayMethodVotesAddOptions",
+              "ApiGatewayMethodVotesAddEmailVarOptions",
               "ApiGatewayMethodVotesUpdateEmailVarOptions",
               "ApiGatewayMethodVotesDeleteEmailVarOptions",
               "ApiGatewayMethodVotesGetvoteEmailVarGet",
-              "ApiGatewayMethodVotesAddPost",
+              "ApiGatewayMethodVotesAddEmailVarPost",
               "ApiGatewayMethodVotesUpdateEmailVarPut",
               "ApiGatewayMethodVotesDeleteEmailVarDelete"
             ]
@@ -951,25 +963,25 @@
           "GetVoteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetVoteLambdaVersionWkOWrGKO9OBuyPdqe5lHuQ6PwPwNZ3qXhXDjXZuc"
+              "Ref": "GetVoteLambdaVersionJOtKEBIJEPyncoJ0Fq63xOBWboBVYiH36uIMtzBtg"
             }
           },
           "PostVoteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PostVoteLambdaVersionn9a9ZSU6JgLkM0bATv2xnwjBbXJzMrUY1FYrfHK5Q"
+              "Ref": "PostVoteLambdaVersioneu4jKI8PvzLaWpADcwwhNR5ZdIwjipvrENmcExmL4A"
             }
           },
           "UpdateVoteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateVoteLambdaVersion3EB0saqD8Y1dLqcS9ef8vt0NeS098hZ64AvCwX7Q29Q"
+              "Ref": "UpdateVoteLambdaVersion7Iqds2URxlsxvHv4fecILCRrTrdcYrr1bF4WBWvIgA"
             }
           },
           "DeleteVoteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteVoteLambdaVersion5fA0l5xKsl4BNMBKng7GgV2x5xwKhUy5FxfZpdi74kY"
+              "Ref": "DeleteVoteLambdaVersionu1YvmUQjtUfiXuMsVUTwbxxGSA19QmydrbEUCQDxn0"
             }
           },
           "ServiceEndpoint": {
@@ -1104,14 +1116,14 @@
         "timeout": 20,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetVoteLambdaVersionWkOWrGKO9OBuyPdqe5lHuQ6PwPwNZ3qXhXDjXZuc"
+        "versionLogicalId": "GetVoteLambdaVersionJOtKEBIJEPyncoJ0Fq63xOBWboBVYiH36uIMtzBtg"
       },
       "postVote": {
         "handler": "handler.postVote",
         "events": [
           {
             "http": {
-              "path": "votes/add",
+              "path": "votes/add/{email}",
               "method": "post",
               "cors": {
                 "origins": [
@@ -1142,7 +1154,7 @@
         "timeout": 20,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "PostVoteLambdaVersionn9a9ZSU6JgLkM0bATv2xnwjBbXJzMrUY1FYrfHK5Q"
+        "versionLogicalId": "PostVoteLambdaVersioneu4jKI8PvzLaWpADcwwhNR5ZdIwjipvrENmcExmL4A"
       },
       "updateVote": {
         "handler": "handler.updateVote",
@@ -1180,7 +1192,7 @@
         "timeout": 20,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "UpdateVoteLambdaVersion3EB0saqD8Y1dLqcS9ef8vt0NeS098hZ64AvCwX7Q29Q"
+        "versionLogicalId": "UpdateVoteLambdaVersion7Iqds2URxlsxvHv4fecILCRrTrdcYrr1bF4WBWvIgA"
       },
       "deleteVote": {
         "handler": "handler.deleteVote",
@@ -1218,7 +1230,7 @@
         "timeout": 20,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "DeleteVoteLambdaVersion5fA0l5xKsl4BNMBKng7GgV2x5xwKhUy5FxfZpdi74kY"
+        "versionLogicalId": "DeleteVoteLambdaVersionu1YvmUQjtUfiXuMsVUTwbxxGSA19QmydrbEUCQDxn0"
       }
     },
     "configValidationMode": "warn",
@@ -1240,7 +1252,7 @@
     "artifact": "C:\\Users\\Brian Pek\\Downloads\\Y3S1\\CS3219 - Software Engineering Principles and Patterns\\OTOT\\task-b\\serverless\\.serverless\\serverless.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless/dev/1605019863509-2020-11-10T14:51:03.509Z",
+    "artifactDirectoryName": "serverless/serverless/dev/1605104106792-2020-11-11T14:15:06.792Z",
     "artifact": "serverless.zip"
   }
 }

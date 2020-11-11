@@ -20,7 +20,7 @@ functions:
     handler: handler.postVote # path will be domain.name.com/dev/votes
     events:
       - http:
-          path: votes/add
+          path: votes/add/{email}
           method: post
           cors: true
   updateVote:

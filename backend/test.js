@@ -31,6 +31,7 @@ describe('Votes REST API', () => {
         });
     });
 
+    // Comment this out
     describe('GET /api/votes', () => {
         it('should list all votes', (done) => {
             chai.request(server)
@@ -66,7 +67,7 @@ describe('Votes REST API', () => {
         });
     });
 
-    describe('POST /api/contacts', () => {
+    describe('POST /api/votes/{email}', () => {
         it('should create a new vote', (done) => {
             let vote = new Vote({
                 email: 'efg@email.com',
@@ -74,7 +75,7 @@ describe('Votes REST API', () => {
             });
 
             chai.request(server)
-                .post('/api/votes')
+                .post('/api/votes/' + vote.email)
                 .send(vote)
                 .end((err, res) => {
                     res.should.have.status(200);

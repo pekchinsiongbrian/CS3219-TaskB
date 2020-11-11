@@ -41,6 +41,7 @@ module.exports.getVote = (event, context, callback) => {
 // POST /votes
 module.exports.postVote = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
+
     connectToDatabase().then(() => {
         Vote.create(JSON.parse(event.body))
             .then((body) =>
@@ -65,6 +66,7 @@ module.exports.updateVote = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
     const body = JSON.parse(event.body); // email, candidate
+
     const filter = { email: body.email };
     const update = { candidate: body.candidate };
 
@@ -92,7 +94,7 @@ module.exports.updateVote = (event, context, callback) => {
 module.exports.deleteVote = (event, context, callback) => {
     context.callbackWaitsForEmptyEventLoop = false;
 
-    const email = event.body;
+    const email = event.pathParameters.email;
 
     connectToDatabase().then(() => {
         Vote.deleteOne({ "email": email })
