@@ -1,0 +1,19 @@
+{
+  "name": "task-b",
+  "version": "1.0.0",
+  "description": "CS3219 Task B",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd backend && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pekchinsiongbrian/CS3219-TaskB.git"
+  },
+  "author": "Brian Pek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pekchinsiongbrian/CS3219-TaskB/issues"
+  },
+  "homepage": "https://github.com/pekchinsiongbrian/CS3219-TaskB#readme"
+}

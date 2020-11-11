@@ -31,21 +31,7 @@ describe('Votes REST API', () => {
         });
     });
 
-    // Comment this out
-    describe('GET /api/votes', () => {
-        it('should list all votes', (done) => {
-            chai.request(server)
-                .get('/api/votes')
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.have.property('data');
-                    res.text.should.contain('All votes retrieved successfully');
-                    done();
-                });
-        });
-    });
-
-    describe('GET /api/votes/{email}', () => {
+    describe('GET /api/votes/getVote/{email}', () => {
         it('should get a single vote by the given email', (done) => {
             let vote = new Vote({
                 email: 'abc@email.com',
@@ -53,13 +39,13 @@ describe('Votes REST API', () => {
             });
             vote.save((err, vote) => {
                 chai.request(server)
-                    .get('/api/votes/' + vote.email)
+                    .get('/api/votes/getVote/' + vote.email)
                     .send(vote)
                     .end((err, res) => {
                         res.should.have.status(200);
                         res.body.should.be.a('object');
                         res.body.should.have.property('message').eql('Getting your ballot');
-                        res.body.data[0].should.have.property('email').eql(vote.email); // Check if can keep eql
+                        res.body.data[0].should.have.property('email').eql(vote.email);
                         res.body.data[0].should.have.property('candidate');
                         done();
                     });
@@ -67,7 +53,7 @@ describe('Votes REST API', () => {
         });
     });
 
-    describe('POST /api/votes/{email}', () => {
+    describe('POST /api/votes/add/{email}', () => {
         it('should create a new vote', (done) => {
             let vote = new Vote({
                 email: 'efg@email.com',
@@ -75,7 +61,7 @@ describe('Votes REST API', () => {
             });
 
             chai.request(server)
-                .post('/api/votes/' + vote.email)
+                .post('/api/votes/add/' + vote.email)
                 .send(vote)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -89,7 +75,7 @@ describe('Votes REST API', () => {
         });
     });
 
-    describe('PUT /api/votes/{email}', () => {
+    describe('PUT /api/votes/update/{email}', () => {
         it('should update a single vote by the given email', (done) => {
             let vote = new Vote({
                 email: 'efg@email.com',
@@ -97,7 +83,7 @@ describe('Votes REST API', () => {
             });
             vote.save((err, vote) => {
                 chai.request(server)
-                    .put('/api/votes/' + vote.email)
+                    .put('/api/votes/update/' + vote.email)
                     .send({ email: 'efg@email.com', candidate: 'Donald' })
                     .end((err, res) => {
                         res.should.have.status(200);
@@ -110,7 +96,7 @@ describe('Votes REST API', () => {
         });
     });
 
-    describe('DELETE /api/votes/{email}', () => {
+    describe('DELETE /api/votes/delete/{email}', () => {
         let vote;
         beforeEach((done) => {
             vote = new Vote({

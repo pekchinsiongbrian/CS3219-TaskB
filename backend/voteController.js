@@ -1,6 +1,6 @@
 Vote = require('./voteModel');
 
-// GET ALL
+// GET all - not an official feature, for quick getting during development only
 exports.index = (req, res) => {
     Vote.get((err, votes) => {
         if (err) {
@@ -111,7 +111,7 @@ exports.delete = (req, res) => {
     });
 };
 
-// DELETE ALL - Comment out
+// DELETE all - not an official feature, for quick deletion during development only
 exports.deleteAll = (req, res) => {
     Vote.deleteMany({}, (err, vote) => {
         if (err) {
